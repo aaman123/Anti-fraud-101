@@ -28,6 +28,13 @@ app.set(port);
 // dynamoDB.dynamoCreateTableWithChargeBacks();
 // dynamoDB.dynamoLoadData();
 
+const redisCache = require('./database/redisCache');
+
+/*
+    Uncomment to seed intial redis cache
+*/
+// redisCache.seedingIntialRedisCache();
+
 const server = http.createServer(app);
 server.listen(port);
 server.on('listening', onListening);

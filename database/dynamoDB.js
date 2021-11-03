@@ -61,10 +61,12 @@ module.exports.dynamoCreateTableWithChargeBacks = () => {
 }
 
 module.exports.dynamoLoadData = () => {
+
+    console.log("Loading data in DynamoDB");
+
     fs.createReadStream('./sample_files/transactional-sample.csv')
         .pipe(csvParser({delimiter: ','}))
         .on('data', function(transaction_data) {
-            console.log("Loading data in DynamoDB");
             if(transaction_data[7] === "TRUE") {
                 var params = {
                     TableName: "transactions_with_chargebacks",
