@@ -11,7 +11,7 @@ module.exports.seedingIntialRedisCache = () => {
         .pipe(csvParser({delimiter: ','}))
         .on('data', function(transaction_data) {
             // change the date object based on what data you want to cache
-            if(new Date(transaction_data[4]) > new Date(moment().subtract(23, 'months').subtract(3, 'days'))) {
+            if(new Date(transaction_data[4]) > new Date(moment().subtract(23, 'months').subtract(4, 'days'))) {
                 const jsonTransaction =  {
                     "transactionId": transaction_data[0],
                     "userId": transaction_data[2],
@@ -24,10 +24,22 @@ module.exports.seedingIntialRedisCache = () => {
                 }
 
                 //command for setting user_id as key and other data as value in redis cache
-                redis.set(transaction_data[2], JSON.stringify(jsonTransaction));             
+                redis.rpush(`${transaction_data[2]}`, JSON.stringify(jsonTransaction));  
             }
         })
         .on('end', () => {
             console.log("Finished loading initial data in redis cache");
         })
 };
+
+module.exports.createRecentTransactionsArray = () => {
+    const mockRecentTransactions = [
+        {"transactionId": '21320398', 'userId': '97051', 'transaction_date': '2019-12-01T23:16:32.812632', 'transaction_amount': '374.56'},
+        {"transactionId": '21320399', 'userId': '2708', 'transaction_date': '2019-12-01T22:45:37.873639', 'transaction_amount': '734.87'},
+        {"transactionId": '21320340', 'userId': '14777', 'transaction_date': '2019-12-01T22:22:43.021495', 'transaction_amount': '760.36'},
+    ]
+
+    mockRecentTransactions.forEach((result) => {
+        redis.rpush('recentTransactions', JSON.stringify(result));
+    })
+}

@@ -3,7 +3,8 @@ const redisClient = require('redis');
 
 /*
     Uncomment if you want to create a redis cluster.
-    If using docker create a .sh file that redis configuation and cluster mode enabled
+    If using docker create a .sh file that has a 
+    redis configuation file and cluster mode enabled
 */
 // var redis = new redisCluster({
 //     servers: [
@@ -24,7 +25,7 @@ redis.on("err", function(err) {
 })
 
 redis.on("connect", function() {
-    console.log("connected");
+    console.log("Connected to redis cache");
 })
 
 module.exports = redis;

@@ -34,6 +34,7 @@ const redisCache = require('./database/redisCache');
     Uncomment to seed intial redis cache
 */
 // redisCache.seedingIntialRedisCache();
+// redisCache.createRecentTransactionsArray();
 
 const server = http.createServer(app);
 server.listen(port);
