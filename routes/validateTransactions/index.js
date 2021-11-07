@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const AWS = require('aws-sdk');
 const redis = require('../../config/redisClient');
+const authenticateToken = require('../../config/jsonToken').authenticateToken;
 
 const dynamoDocumentClient = new AWS.DynamoDB.DocumentClient();
 
-router.post('/validateTransaction', async (req, res) => {
+router.post('/validateTransaction', authenticateToken, async (req, res) => {
     let { transaction_id } = req.body;
 
     redisCacheAmountExceeded(req, res)

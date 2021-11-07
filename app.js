@@ -16,6 +16,10 @@ const dynamoDB = require('./database/dynamoDB');
 const app = express();
 const port = process.env.PORT || 8080;
 
+const jwtToken = require('./config/jsonToken');
+/* UNCOMMENT TO GET ACCESS TOKEN FOR THE API */
+// console.log(jwtToken.createJsonToken());
+
 app.use(json());
 app.use(urlencoded({extended: true}));
 app.use("/api", require('./routes/validateTransactions'));
