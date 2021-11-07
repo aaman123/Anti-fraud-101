@@ -1,0 +1,134 @@
+﻿CHALLENGE 1)
+
+
+
+
+* Explain the money flow and the information flow in the acquirer market and the role of the main players.
+
+
+* Money flow and information flow in the acquirer market can be broadly classified into two categories.
+
+
+(a) The Player View  (b) The Step View.
+
+
+The Player View - There are five main players who take part in any card transaction, namely - Consumer, Merchant, Acquirer or Acquiring Bank, Issuer or Issuing Bank, Payment Processor, or Gateway.
+
+
+           FLOW  
+1. A consumer buys goods or services from a Merchant and provides his/her credit card information.
+2. The Merchant relays the credit card information to an Acquirer to check and validate for funds and other information. The Merchant can also choose a Payment Gateway to connect to an Acquirer.
+3. The Acquirer communicates with the Issuer using a card association physical network to check if funds are available on the consumer's card.
+4. The Issuer checks the consumer's credit line and sets aside the funds needed for the payment.
+           
+The Step View - There are seven steps implemented for the money to transfer, namely - Card Authentication, Card Authorization, Authorization Reversal, Settlement, Credits, Chargebacks, and Representment.
+
+
+                FLOW 
+1. Card Authentication checks a credit card number using a series of checks to see if the number provided is valid or not.  Usually, a MOD 10 check is performed.
+2. Card Authorization includes reserving funds by a communication flow mentioned above where a merchant requests acquirer who in turn requests the issuer for a fund check on the consumer's credit line.                     
+3. If the purchase is declined or some other error occurs while transacting, the authorization is reversed.
+4. A Settlement request is where the money actually gets transferred from the consumer to the merchant after Authentication and Authorization are completed.
+5. Credit refers to a refund of money in case the consumer returns the goods and services back to the merchant, a request triggered back using the same payment method to the acquirer and the issuer.
+6. In case a chargeback is filed by a consumer, the issuer asks for additional documentation to prove if the transaction is valid or not, and both the merchant and consumers are expected to prove a valid transaction.
+            Example of Credit Card Association - VISA, Mastercard, American Express, etc.
+            Examples of Acquirers - Rede, ICICI, Axis, Cielo, InfinitePay, etc.
+            Examples of Issuers - A Bank or a financial institution.
+            Examples of Payment Gateway or Processor - Razorpay, Stripe, Juspay, etc.
+
+
+            All these institutions operate under the PCI DSS regulations.
+
+
+
+
+* Explain the difference between acquirer, sub-acquirer, and payment gateway and how the flow explained in question 1 changes for these players.
+* 1. Acquirer - A Financial Institution that processes credit and debit card transactions on behalf of the card issuer.
+2. Sub Acquirer - An Institution similar to Acquirer but is non-autonomous due to lack of proper rights of processing transactions. In layman's terms, it processes transactions and transmits the data to other players in the payment flow.
+3.  Payment Gateway - A bridge between the acquirer and the consumer/merchant that transmits credit information to the acquirer and receives transactions information from the acquirer.
+ 
+According to the flow mentioned above, an Acquirer is an integral part of the network because they are the bridge between card networks, issuers, and the consumers/merchants. A Payment Gateway can be used by a merchant to securely transmit information to the Acquirer and receive information from the acquirer 
+and other information, it forms an intermediary for secure transactions. A sub-acquirer is an optional institution that can be used in the payment flow as 
+an additional node for further processing and security.
+
+
+
+
+* Explain what chargebacks are, how they differ from cancellations, and what is their connection with fraud in the acquiring world.
+* A Chargeback often known as a Payment dispute occurs when a cardholder files a dispute over a transaction and requests the card-issuing bank for payment reversal.
+
+
+Chargebacks often include a long procedure of validation and proof and the funds are held with the issuer until the dispute is resolved. Merchants are notified of the dispute by the acquirer or the payment processor and the issuer is ultimately responsible to solve the dispute.
+
+
+Cancellations refer to canceling a payment before it is settled or any funds are exchanged between accounts. Cancellations usually do not involve any 
+disputes or problems and are a part of the natural flow of payment.
+
+
+Chargebacks are usually related to potential frauds because most of the time when a chargeback is filed a fraud is at play, meaning a consumer has unidentified transactions with a merchant without his/her knowledge. This can be done by an adversary or a breach in the system. Therefore, a lot of acquirers and issuers are weighing down on fraud preventions techniques to minimize frauds and chargebacks because they hinder the payment process and cause disputes.
+
+
+
+
+
+
+
+
+
+
+CHALLENGE 2)
+
+
+* Analyze the data provided and provide your conclusions ( consider that all transactions are made using a mobile device ).
+
+
+* The transactional data consists of 8 columns namely transaction_id, merchant_id, user_id, card_number, transaction_date, transaction_amount, device_id, has_cbk.
+        
+        Some statistics about the data:
+
+
+        Total number of transactions: 3199
+        Number of normal transactions: 2808
+        Number of fraudulent transactions: 391
+        Percentage of fraudulent transactions: 7
+
+
+          
+
+
+The following Bar chart is plotted using python libraries like Matplotlib, Numpy, and Pandas.
+
+
+According to the chart, the following dataset suffers from Class Imbalance meaning there are a lot fewer fraud transactions than normal transactions.
+
+
+  
+
+
+
+The above-given graph shows a comparison between transaction_amount and class of the transaction meaning what is the mean amount range of normal transaction vs fraud transaction.
+
+
+It is seen that both the normal and fraud transactions are in the same range of 0 - 4000 dollars but the normal transaction shows a stable and gradual decrease in the transaction amount whereas there are big fluctuations in the transaction amount of fraudulent transactions. 
+  
+
+The above-given scatter plot is between the day of the transaction and the class of transaction (normal vs fraud).
+
+
+It is seen that a lot of fraudulent transactions were reported during the end of the previous month and the beginning of the current month between 25th - 5th of overlapping months. This can be a crucial statistic to predict that most of the fraud transactions are done during a particular time period of the month.
+
+
+Using these statistics and insights we can get perform outlier analysis and other binning methods to pre-process the data and create a reliable classifier to predict frauds.
+
+
+
+
+
+
+* In addition to the spreadsheet data, what other data would you look at to try to find patterns of possible frauds?
+* After initial analysis, it is seen that the given dataset is particularly small to create an efficient model. For example, there are only 3199 rows in the dataset with transactions ranging only for a single month. To predict correctly I would like a lot bigger dataset since large datasets provide more accurate mean values and can identify outliers the could skew the data.
+        
+I have used a rule-based system for challenge 3 but companies using strict rule-based systems may often lose customers due to which score-based ML models are often coupled with the rule-based system to allow for predictive reasoning.
+
+
+Other data that can be useful are if the transaction used a payment gateway or not, or from which area, network, or IP address the transaction was initiated.
