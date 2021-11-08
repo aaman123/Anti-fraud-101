@@ -3,6 +3,10 @@ const csvParser = require('csv-parse');
 const moment = require('moment');
 const redis = require('../config/redisClient');
 
+/*
+    Functionality - Intially seeds the database based on user_id
+    Dependencies - Redis Cache
+*/
 module.exports.seedingIntialRedisCache = () => {
 
     console.log("Loading intial data into redis cache");
@@ -32,11 +36,15 @@ module.exports.seedingIntialRedisCache = () => {
         })
 };
 
+/*
+    Functionality - Creates a recent transactions array.
+    Dependencies - Redis Cache
+*/
 module.exports.createRecentTransactionsArray = () => {
     const mockRecentTransactions = [
         {"transactionId": '21320398', 'userId': '97051', 'transaction_date': '2019-12-01T23:16:32.812632', 'transaction_amount': '374.56'},
         {"transactionId": '21320399', 'userId': '2708', 'transaction_date': '2019-12-01T22:45:37.873639', 'transaction_amount': '734.87'},
-        {"transactionId": '21320340', 'userId': '14777', 'transaction_date': '2019-12-01T22:22:43.021495', 'transaction_amount': '760.36'},
+        {"transactionId": '21320340', 'userId': '14777', 'transaction_date': '2019-12-01T22:22:43.021495', 'transaction_amount': '760.36'}
     ]
 
     mockRecentTransactions.forEach((result) => {

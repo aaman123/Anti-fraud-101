@@ -5,6 +5,10 @@ const csvParser = require('csv-parse');
 let dynamo = new AWS.DynamoDB();
 let dynamoDocumentClient = new AWS.DynamoDB.DocumentClient();
 
+/*
+    Functionality - Creates a DynamoDB table with the given params
+    Dependencies - AWS-SDK
+*/
 module.exports.dynamoCreateTable = () => {
 
     var params = {
@@ -60,6 +64,10 @@ module.exports.dynamoCreateTableWithChargeBacks = () => {
     })
 }
 
+/*
+    Functionality - Loads data in Dynamo tables
+    Dependencies - AWS-SDK
+*/
 module.exports.dynamoLoadData = () => {
 
     console.log("Loading data in DynamoDB");

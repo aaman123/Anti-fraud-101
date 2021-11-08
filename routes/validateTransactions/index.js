@@ -5,6 +5,10 @@ const authenticateToken = require('../../config/jsonToken').authenticateToken;
 
 const dynamoDocumentClient = new AWS.DynamoDB.DocumentClient();
 
+/*
+    Functionality - Controller and route for validating a transaction
+    Dependencies - Dynamo, Redis, AWS-SDK.
+*/
 router.post('/validateTransaction', authenticateToken, async (req, res) => {
     let { transaction_id } = req.body;
 
@@ -59,6 +63,9 @@ router.post('/validateTransaction', authenticateToken, async (req, res) => {
     })
 })
 
+/*
+    Functionality - Independent promise callbacks
+*/
 const dynamoDBCall = (request, response) => {
     return new Promise((resolve, reject) => {
 
