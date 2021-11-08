@@ -11,7 +11,7 @@ module.exports.seedingIntialRedisCache = () => {
         .pipe(csvParser({delimiter: ','}))
         .on('data', function(transaction_data) {
             // change the date object based on what data you want to cache
-            if(new Date(transaction_data[4]) > new Date(moment().subtract(23, 'months').subtract(4, 'days'))) {
+            if(new Date(transaction_data[4]) > new Date(moment().subtract(23, 'months').subtract(7, 'days'))) {
                 const jsonTransaction =  {
                     "transactionId": transaction_data[0],
                     "userId": transaction_data[2],
