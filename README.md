@@ -1,4 +1,4 @@
-# cloudwalk-assessment
+# ANTI - FRAUD - 101
 A simple anti-fraud system for online transactions
 
 # for running the app locally
